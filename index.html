@@ -1,0 +1,175 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Price Comparison</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: white;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: blueviolet;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav {
+      background-color: #FE7743;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      display: block;
+    }
+    nav a:hover {
+      background-color: #60b5ff;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+    .search-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+    .search-filter input[type="text"],
+    .search-filter select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: 1px solid #117e34;
+      border-radius: 5px;
+      flex: 1;
+      min-width: 200px;
+    }
+    .product {
+      background: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .product h2 {
+      margin-top: 0;
+    }
+    .prices {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    .price-option {
+      background: #f0f0f0;
+      padding: 1rem;
+      border-radius: 5px;
+      width: 30%;
+      box-sizing: border-box;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .price-option a {
+      text-decoration: none;
+      color: #4CAF50;
+      font-weight: bold;
+    }@media (max-width: 768px) {
+  .price-option {
+    width: 45%;
+  }
+}
+
+@media (max-width: 480px) {
+  .price-option {
+    width: 100%;
+  }
+  nav {
+    flex-direction: column;
+  }
+  nav a {
+    padding: 1rem;
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Price Comparison Website</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Products</a>
+    <a href="#">Deals</a>
+    <a href="tel: 7480938470">Contact</a>
+    <a href="email: pt7024223@gmail.com">Email</a>
+    <a href="#">About Us</a>
+  </nav>
+  <div class="container">
+    <div class="search-filter">
+      <input type="text" placeholder="Search here">
+      <select>
+        <option value="all">All Categories</option>
+        <option value="smartphones">Smartphones</option>
+        <option value="laptops">Laptops</option>
+        <option value="accessories">Accessories</option>
+      </select>
+    </div><div class="product">
+  <h2>Categories 1: Smartphone</h2>
+  <div class="prices">
+    <div class="price-option">
+      <img src="Screenshot 2025-04-24 153739.png" alt="Image" width="120px">
+      <p>SAMSUNG Galaxy A14 5G</p>
+      <p>Amazon: 14999</p>
+      <a href="https://www.amazon.in/Samsung-Galaxy-Storage-without-Charger/dp/B0CS35XMKY?th=1">Buy Now</a>
+    </div>
+    <div class="price-option">
+      <img src="Screenshot 2025-04-24 153739.png" alt="image" width="120px">
+      <p>SAMSUNG Galaxy A14 5G</p>
+      <p>Croma: 14499</p>
+      <a href="https://www.croma.com/samsung-galaxy-a14-5g-4gb-ram-128gb-black-/p/303894?srsltid=AfmBOorzfm51CM7bFr-iwzUreUhxX6ib2CkzlA80hZi9-fD2SliEVHCw">Buy Now</a>
+    </div>
+    <div class="price-option">
+      <img src="Screenshot 2025-04-24 153739.png" alt="image" width="120px">
+      <p>SAMSUNG Galaxy A14 5G</p>
+      <p>Flipkart: 15499</p>
+      <a href="https://www.flipkart.com/samsung-galaxy-a14-5g-black-128-gb/p/itm4e53e4bf801e1">Buy Now</a>
+    </div>
+  </div>
+</div>
+
+<div class="product">
+  <h2>Categories 2: Laptop</h2>
+  <div class="prices">
+    <div class="price-option">
+      <img src="macbook air m2.png" alt="Image" width="150px">
+      <P>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</P>
+      <p>Amazon: 80990</p>
+      <a href="https://www.amazon.in/2022-Apple-MacBook-Laptop-chip/dp/B0B3BLY13H">Buy Now</a>
+    </div>
+    <div class="price-option">
+      <img src="macbook air m2.png" alt=" image" width="150px">
+      <p>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</p>
+      <p>Croma: 80990</p>
+      <a href="https://www.croma.com/apple-macbook-air-13-6-inch-m2-8gb-256gb-macos-midnight-/p/256603">Buy Now</a>
+    </div>
+    <div class="price-option">
+      <img src="macbook air m2.png" alt="image" width="150px">
+      <p>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</p>
+      <p>Flipkart:79994</p>
+      <a href="https://www.flipkart.com/apple-macbook-air-m2-8-gb-256-gb-ssd-mac-os-monterey-mlxy3hn-a/p/itm6533ea968a81e?pid=COMGFB2GWHPVFMJW&lid=LSTCOMGFB2GWHPVFMJWKVXDUX&marketplace=FLIPKART&q=macbook+air+m2&store=6bo%2Fb5g&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_2_6_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_2_6_na_na_ps&fm=Search&iid=6f7f2ed1-9927-4eb5-8d9b-265bed7a489a.COMGFB2GWHPVFMJW.SEARCH&ppt=sp&ppn=sp&ssid=ifrvrkpa4w0000001745489992089&qH=5be12f29ec3566a2">Buy Now</a>
+    </div>
+  </div>
+</div>
+
+  </div>
+</body>
+</html>
