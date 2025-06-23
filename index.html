@@ -1,195 +1,395 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Price Comparison</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: white;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background-color: blueviolet;
-      color: white;
-      padding: 1rem;
-      text-align: center;
-    }
-    nav {
-      background-color: #FE7743;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    nav a {
-      color: white;
-      padding: 0.75rem 1.5rem;
-      text-decoration: none;
-      display: block;
-    }
-    nav a:hover {
-      background-color: #60b5ff;
-    }
-    .container {
-      max-width: 1200px;
-      margin: 2rem auto;
-      padding: 1rem;
-    }
-    .search-filter {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      margin-bottom: 2rem;
-    }
-    .search-filter input[type="text"],
-    .search-filter select {
-      padding: 0.5rem;
-      font-size: 1rem;
-      border: 1px solid #117e34;
-      border-radius: 5px;
-      flex: 1;
-      min-width: 200px;
-    }
-    .product {
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-    }
-    .product h2 {
-      margin-top: 0;
-    }
-    .prices {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      margin-top: 1rem;
-    }
-    .price-option {
-      background: #f0f0f0;
-      padding: 1rem;
-      border-radius: 5px;
-      width: 30%;
-      box-sizing: border-box;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-    .price-option a {
-      text-decoration: none;
-      color: #4CAF50;
-      font-weight: bold;
-    }@media (max-width: 768px) {
-  .price-option {
-    width: 45%;
-  }
-}
-
-@media (max-width: 480px) {
-  .price-option {
-    width: 100%;
-  }
-  nav {
-    flex-direction: column;
-  }
-  nav a {
-    padding: 1rem;
-    text-align: center;
-  }
-}
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QUENTLY - Price Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Price Comparison Website</h1>
-  </header>
-  <nav>
-    <a href="#">Home</a>
-    <a href="#">Products</a>
-    <a href="#">Deals</a>
-    <a href="tel: 7480938470">Contact</a>
-    <a href="email: pt7024223@gmail.com">Email</a>
-    <a href="#">About Us</a>
-  </nav>
-  <div class="container">
-    <div class="search-filter">
-      <input type="text" placeholder="Search here">
-      <select>
-        <option value="all">All Categories</option>
-        <option value="smartphones">Smartphones</option>
-        <option value="laptops">Laptops</option>
-        <option value="accessories">Accessories</option>
-      </select>
-    </div><div class="product">
-  <h2>Categories 1: Smartphone</h2>
-  <div class="prices">
-    <div class="price-option">
-      <img src="Screenshot 2025-04-24 153739.png" alt="Image" width="120px">
-      <p>SAMSUNG Galaxy A14 5G</p>
-      <p>Amazon: 14999</p>
-      <a href="https://www.amazon.in/Samsung-Galaxy-Storage-without-Charger/dp/B0CS35XMKY?th=1">Buy Now</a>
+    <div class="logo-container">
+        <a href="#" class="logo">
+            <i class="fas fa-chart-line"></i>
+            <span>Quently</span>
+        </a>
     </div>
-    <div class="price-option">
-      <img src="Screenshot 2025-04-24 153739.png" alt="image" width="120px">
-      <p>SAMSUNG Galaxy A14 5G</p>
-      <p>Croma: 14499</p>
-      <a href="https://www.croma.com/samsung-galaxy-a14-5g-4gb-ram-128gb-black-/p/303894?srsltid=AfmBOorzfm51CM7bFr-iwzUreUhxX6ib2CkzlA80hZi9-fD2SliEVHCw">Buy Now</a>
-    </div>
-    <div class="price-option">
-      <img src="Screenshot 2025-04-24 153739.png" alt="image" width="120px">
-      <p>SAMSUNG Galaxy A14 5G</p>
-      <p>Flipkart: 15499</p>
-      <a href="https://www.flipkart.com/samsung-galaxy-a14-5g-black-128-gb/p/itm4e53e4bf801e1">Buy Now</a>
-    </div>
-  </div>
-</div>
 
-<div class="product">
-  <h2>Categories 2: Laptop</h2>
-  <div class="prices">
-    <div class="price-option">
-      <img src="macbook air m2.png" alt="Image" width="150px">
-      <P>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</P>
-      <p>Amazon: 80990</p>
-      <a href="https://www.amazon.in/2022-Apple-MacBook-Laptop-chip/dp/B0B3BLY13H">Buy Now</a>
+    <div class="floating-menu">
+        <button class="menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <div class="menu-content">
+            <a href="#home"><i class="fas fa-home"></i> Home</a>
+            <a href="#deals"><i class="fas fa-tags"></i> Deals</a>
+            <a href="#products"><i class="fas fa-box"></i> Products</a>
+            <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            <a href="#contact"><i class="fas fa-envelope"></i> Contact Us</a>
+        </div>
     </div>
-    <div class="price-option">
-      <img src="macbook air m2.png" alt=" image" width="150px">
-      <p>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</p>
-      <p>Croma: 80990</p>
-      <a href="https://www.croma.com/apple-macbook-air-13-6-inch-m2-8gb-256gb-macos-midnight-/p/256603">Buy Now</a>
-    </div>
-    <div class="price-option">
-      <img src="macbook air m2.png" alt="image" width="150px">
-      <p>Apple MacBook Air (13.6 inch, M2, 8GB, 256GB, macOS)</p>
-      <p>Flipkart:79994</p>
-      <a href="https://www.flipkart.com/apple-macbook-air-m2-8-gb-256-gb-ssd-mac-os-monterey-mlxy3hn-a/p/itm6533ea968a81e?pid=COMGFB2GWHPVFMJW&lid=LSTCOMGFB2GWHPVFMJWKVXDUX&marketplace=FLIPKART&q=macbook+air+m2&store=6bo%2Fb5g&srno=s_1_1&otracker=AS_QueryStore_OrganicAutoSuggest_2_6_na_na_ps&otracker1=AS_QueryStore_OrganicAutoSuggest_2_6_na_na_ps&fm=Search&iid=6f7f2ed1-9927-4eb5-8d9b-265bed7a489a.COMGFB2GWHPVFMJW.SEARCH&ppt=sp&ppn=sp&ssid=ifrvrkpa4w0000001745489992089&qH=5be12f29ec3566a2">Buy Now</a>
-    </div>
-  </div>
-</div>
 
-  </div>
-    <div>
-    <form>
-       <fieldset>
-        <legend>Feedback and Suggestion</legend>
-        <label for="selector1">Choose Categories</label>
-        <select name="aaaa" id="selector1">
-            <option value="All Categories">All Categories</option>
-            <option value="Smartphone">Smartphone</option>
-            <option value="Laptop">Laptop</option>
-            <option value="Accessories">Accessories</option>
-        </select>
-        <br>
-        <br>
-        <textarea name="textarea" id="textearea" cols="30" rows="10" placeholder="enter text here.."></textarea>
-        <br>
-        <br>
-        <button>Submit</button>
-       </fieldset>
-    </form>
-</div>
+    <header class="hero">
+        <div class="hero-background">
+            <div class="animated-shape shape1"></div>
+            <div class="animated-shape shape2"></div>
+            <div class="animated-shape shape3"></div>
+        </div>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="animate-text">Track Prices Like a Pro</h1>
+                <p class="animate-text delay-1">Never miss a deal again with our intelligent price tracking system</p>
+                <div class="hero-badges">
+                    <span class="badge"><i class="fas fa-check-circle"></i> Real-time Updates</span>
+                    <span class="badge"><i class="fas fa-bolt"></i> Instant Alerts</span>
+                    <span class="badge"><i class="fas fa-shield-alt"></i> Secure Tracking</span>
+                </div>
+            </div>
+            <div class="search-container animate-text delay-2">
+                <div class="search-wrapper">
+                    <input type="text" placeholder="Enter product URL or name..." class="search-input">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                        Track Price
+                    </button>
+                </div>
+                <div class="search-suggestions">
+                    <span>Popular: </span>
+                    <a href="#">iPhone 15</a>
+                    <a href="#">Samsung TV</a>
+                    <a href="#">Gaming Laptop</a>
+                </div>
+            </div>
+        </div>
+        <div class="hero-stats">
+            <div class="stat-card animate-up">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="counter">100+</h3>
+                    <p>Products Tracked</p>
+                </div>
+            </div>
+            <div class="stat-card animate-up delay-1">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="counter">0K+</h3>
+                    <p>Happy Users</p>
+                </div>
+            </div>
+            <div class="stat-card animate-up delay-2">
+                <div class="stat-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="counter">2M+</h3>
+                    <p>Price Alerts</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="categories-section">
+            <h2>Browse by Category</h2>
+            <div class="categories-grid">
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h3>Smartphones</h3>
+                    <p>Track prices of latest phones</p>
+                    <span class="category-count">1.2K+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-laptop"></i>
+                    </div>
+                    <h3>Laptops</h3>
+                    <p>Find the best laptop deals</p>
+                    <span class="category-count">800+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tv"></i>
+                    </div>
+                    <h3>Smart TVs</h3>
+                    <p>Compare TV prices</p>
+                    <span class="category-count">500+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-watch"></i>
+                    </div>
+                    <h3>Smartwatches</h3>
+                    <p>Track wearable prices</p>
+                    <span class="category-count">300+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-headphones"></i>
+                    </div>
+                    <h3>Audio</h3>
+                    <p>Headphones & Speakers</p>
+                    <span class="category-count">600+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Cameras</h3>
+                    <p>DSLR & Mirrorless</p>
+                    <span class="category-count">400+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3>Gaming</h3>
+                    <p>Consoles & Accessories</p>
+                    <span class="category-count">350+ Products</span>
+                </a>
+
+                <a href="#" class="category-card">
+                    <div class="category-icon">
+                        <i class="fas fa-tablet-alt"></i>
+                    </div>
+                    <h3>Tablets</h3>
+                    <p>Track tablet prices</p>
+                    <span class="category-count">250+ Products</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="trending-section">
+            <h2>Trending Products</h2>
+            <div class="product-grid">
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Product">
+                        <div class="price-tag">$299.99</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Wireless Headphones</h3>
+                        <div class="price-history">
+                            <div class="price-chart"><canvas></canvas></div>
+                            <div class="price-stats">
+                                <span class="price-change positive">-15%</span>
+                                <span class="price-period">Last 30 days</span>
+                            </div>
+                        </div>
+                        <button class="track-btn">Track Price</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="https://via.placeholder.com/300x200" alt="Product">
+                        <div class="price-tag">49999</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Smart Watch</h3>
+                        <div class="price-history">
+                            <div class="price-chart"><canvas></canvas></div>
+                            <div class="price-stats">
+                                <span class="price-change negative">+5%</span>
+                                <span class="price-period">Last 30 days</span>
+                            </div>
+                        </div>
+                        <button class="track-btn">Track Price</button>
+                    </div>
+                </div>
+
+                <div class="product-card">
+                    <div class="product-image">
+                        <img src="macbook air m2.png" alt="Product">
+                        <div class="price-tag">81999</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Gaming Laptop</h3>
+                        <div class="price-history">
+                            <div class="price-chart"><canvas></canvas></div>
+                            <div class="price-stats">
+                                <span class="price-change positive">-20%</span>
+                                <span class="price-period">Last 30 days</span>
+                            </div>
+                        </div>
+                        <button class="track-btn">Track Price</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Why Choose Us</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bell"></i>
+                    <h3>Price Alerts</h3>
+                    <p>Get notified when prices drop to your target</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Price History</h3>
+                    <p>View detailed price trends over time</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Mobile Friendly</h3>
+                    <p>Track prices on the go with our mobile app</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Tracking</h3>
+                    <p>Your data is always safe and private</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="container">
+                <h2 class="section-title">About PriceTracker</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <h3>Your Smart Shopping Companion</h3>
+                        <p>PriceTracker is your ultimate shopping companion, designed to help you make informed purchasing decisions and save money on your favorite products. We understand that finding the best deals can be time-consuming, which is why we've created a powerful platform that does the work for you.</p>
+                        
+                        <div class="about-features">
+                            <div class="feature">
+                                <i class="fas fa-chart-line"></i>
+                                <h4>Real-time Price Tracking</h4>
+                                <p>Monitor price changes across multiple retailers and get instant notifications when prices drop.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-bell"></i>
+                                <h4>Smart Alerts</h4>
+                                <p>Set custom price alerts and receive notifications when products reach your desired price point.</p>
+                            </div>
+                            <div class="feature">
+                                <i class="fas fa-shield-alt"></i>
+                                <h4>Secure & Reliable</h4>
+                                <p>Your data is protected with industry-standard security measures and encryption protocols.</p>
+                            </div>
+                        </div>
+
+                        <div class="about-stats">
+                            <div class="stat">
+                                <span class="stat-number">0+</span>
+                                <span class="stat-label">Products Tracked</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">0K+</span>
+                                <span class="stat-label">Happy Users</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">24/7</span>
+                                <span class="stat-label">Price Monitoring</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-content">
+                    <div class="contact-grid">
+                        <div class="contact-info">
+                            <div class="contact-card">
+                                <i class="fas fa-envelope"></i>
+                                <h3>Email Us</h3>
+                                <p><a href="mailto:pt7024223@gmail.com">pt7024223@gmail.com</a></p>
+                                <div class="response-time">
+                                    <i class="fas fa-clock"></i>
+                                    <div class="response-info">
+                                        <span class="response-label">Response Time</span>
+                                        <span class="response-value">Within 24 hours</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="contact-card">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <h3>Location</h3>
+                                <p>Global Support</p>
+                                <div class="availability">
+                                    <i class="fas fa-globe"></i>
+                                    <div class="availability-info">
+                                        <span class="availability-label">Available</span>
+                                        <span class="availability-value">24/7 Support</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="contact-form">
+                            <form id="contactForm">
+                                <div class="form-group">
+                                    <label for="name">Name</label>
+                                    <input type="text" id="name" name="name" required placeholder="Your name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="email" id="email" name="email" required placeholder="Your email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="subject">Subject</label>
+                                    <input type="text" id="subject" name="subject" required placeholder="Message subject">
+                                </div>
+                                <div class="form-group">
+                                    <label for="message">Message</label>
+                                    <textarea id="message" name="message" required placeholder="Your message" rows="5"></textarea>
+                                </div>
+                                <button type="submit" class="submit-btn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Send Message
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We help you make smart shopping decisions by tracking prices across the web.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="#">Price Alerts</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/pawan-79t" target="_blank" title="Connect on LinkedIn"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Price History Tracker. All rights reserved.</p>
+        </div>
+    </footer>
+    <script src="script.js"></script>
 </body>
-</html>
+</html> 
