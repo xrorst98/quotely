@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Sony Headphones",
+    "price": "4350",
+    "website": "Amazon",
+    "url": "https://amzn.in/d/fEUdCSY",
+    "image": "sony headphones.png"
+  },
+  {
+    "name": "Apple Watch",
+    "price": "49999",
+    "website": "Amazon",
+    "url": "https://amzn.in/d/ipjQv9g",
+    "image": "apple watch.png"
+  }
+]
