@@ -68,25 +68,64 @@ document.querySelectorAll('.stat-card, .category-card, .product-card').forEach(e
     observer.observe(el);
 });
 
-// Search functionality
-const searchInput = document.querySelector('.search-input');
-const searchBtn = document.querySelector('.search-btn');
+// Fetch product data and enable search functionality
+let products = [];
+fetch('products.json')
+    .then(response => response.json())
+    .then(data => { products = data; });
 
-searchBtn.addEventListener('click', () => {
-    const searchTerm = searchInput.value.trim();
-    if (searchTerm) {
-        // Add loading state
-        searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
-        searchBtn.disabled = true;
-
-        // Simulate search (replace with actual search functionality)
-        setTimeout(() => {
-            searchBtn.innerHTML = '<i class="fas fa-search"></i> Track Price';
-            searchBtn.disabled = false;
-            showNotification('Search completed for: ' + searchTerm);
-        }, 1500);
+function displayProduct(product) {
+    const container = document.getElementById('search-results');
+    if (!product) {
+        container.innerHTML = '<p>No product found.</p>';
+        return;
     }
-});
+    // Check if only image is present
+    const hasDetails = product.name || product.price || product.website || product.url;
+    if (!hasDetails && product.image) {
+        container.innerHTML = `
+            <div class="product-search-card">
+                <img src="${product.image}" alt="Product Image" class="product-search-image">
+                <div class="product-search-info">
+                    <p>No details available for this product.</p>
+                </div>
+            </div>
+        `;
+        return;
+    }
+    container.innerHTML = `
+        <div class="product-search-card">
+            <img src="${product.image || ''}" alt="${product.name || ''}" class="product-search-image">
+            <div class="product-search-info">
+                <h3>${product.name || 'N/A'}</h3>
+                <p><strong>Price:</strong> ₹${product.price || 'N/A'}</p>
+                <p><strong>Website:</strong> ${product.website || 'N/A'}</p>
+                <a href="${product.url || '#'}" target="_blank">${product.url ? 'View Product' : 'No Link'}</a>
+            </div>
+        </div>
+    `;
+}
+
+// Listen for search button click
+const searchBtn = document.querySelector('.search-btn');
+const searchInput = document.querySelector('.search-input');
+if (searchBtn && searchInput) {
+    searchBtn.addEventListener('click', () => {
+        const query = searchInput.value.trim().toLowerCase();
+        if (!query) return;
+        const product = products.find(
+            p => p.name && p.name.toLowerCase().includes(query)
+        );
+        displayProduct(product);
+    });
+    // Optional: search on Enter key
+    searchInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            searchBtn.click();
+        }
+    });
+}
 
 // Notification System
 function showNotification(message, type = 'info') {
