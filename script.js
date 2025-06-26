@@ -93,12 +93,40 @@ function displayProduct(product) {
         `;
         return;
     }
+
+    // --- Price stats logic ---
+    // Sample price history data (should be replaced with real data if available)
+    const priceHistoryMap = {
+        'sony headphones': [350, 340, 330, 320, 310, 305, 299, 4350],
+        'apple watch': [850, 860, 870, 880, 890, 895, 899, 49999],
+        'macbook air m2': [102000, 95000, 90000, 88000, 85000, 83000, 81999],
+    };
+    const key = (product.name || '').toLowerCase();
+    let priceHistory = priceHistoryMap[key] || [];
+    // Always include the current price if not present
+    const currentPrice = parseFloat(product.price);
+    if (currentPrice && !priceHistory.includes(currentPrice)) {
+        priceHistory = [...priceHistory, currentPrice];
+    }
+    // If no price history, use current price for all stats
+    if ((!priceHistory || priceHistory.length === 0 || isNaN(currentPrice)) && !isNaN(currentPrice)) {
+        priceHistory = [currentPrice];
+    }
+    let avgPrice = 'N/A', maxPrice = 'N/A';
+    if (priceHistory.length > 0 && !isNaN(currentPrice)) {
+        const sum = priceHistory.reduce((a, b) => a + b, 0);
+        avgPrice = Math.round(sum / priceHistory.length);
+        maxPrice = Math.max(...priceHistory);
+    }
+
     container.innerHTML = `
         <div class="product-search-card">
             <img src="${product.image || ''}" alt="${product.name || ''}" class="product-search-image">
             <div class="product-search-info">
                 <h3>${product.name || 'N/A'}</h3>
-                <p><strong>Price:</strong> ₹${product.price || 'N/A'}</p>
+                <p><strong>Current Price:</strong> ₹${product.price || 'N/A'}</p>
+                <p><strong>Average Price:</strong> ₹${avgPrice}</p>
+                <p><strong>Highest Price:</strong> ₹${maxPrice}</p>
                 <p><strong>Website:</strong> ${product.website || 'N/A'}</p>
                 <a href="${product.url || '#'}" target="_blank">${product.url ? 'View Product' : 'No Link'}</a>
             </div>
@@ -335,4 +363,75 @@ const errorNotificationStyle = `
 `;
 
 // Add error notification style to existing styles
-styleSheet.textContent += errorNotificationStyle; 
+styleSheet.textContent += errorNotificationStyle;
+
+// --- Product Management Section Logic ---
+function renderProductList() {
+    const productList = document.getElementById('productList');
+    if (!productList) return;
+    if (!products.length) {
+        productList.innerHTML = '<p>No products available.</p>';
+        return;
+    }
+    let table = `<table class="product-list-table"><thead><tr><th>Name</th><th>Price</th><th>Website</th><th>URL</th><th>Image</th><th>Actions</th></tr></thead><tbody>`;
+    products.forEach((p, idx) => {
+        table += `<tr>
+            <td><input type="text" value="${p.name}" data-idx="${idx}" class="edit-name" style="width:120px"></td>
+            <td><input type="number" value="${p.price}" data-idx="${idx}" class="edit-price" style="width:80px"></td>
+            <td><input type="text" value="${p.website}" data-idx="${idx}" class="edit-website" style="width:90px"></td>
+            <td><input type="text" value="${p.url}" data-idx="${idx}" class="edit-url" style="width:160px"></td>
+            <td><input type="text" value="${p.image}" data-idx="${idx}" class="edit-image" style="width:110px"></td>
+            <td>
+                <button class="product-action-btn edit" data-idx="${idx}">Save</button>
+                <button class="product-action-btn delete" data-idx="${idx}">Delete</button>
+            </td>
+        </tr>`;
+    });
+    table += '</tbody></table>';
+    productList.innerHTML = table;
+
+    // Add event listeners for edit and delete
+    document.querySelectorAll('.product-action-btn.edit').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const idx = this.getAttribute('data-idx');
+            products[idx].name = document.querySelector(`.edit-name[data-idx='${idx}']`).value;
+            products[idx].price = document.querySelector(`.edit-price[data-idx='${idx}']`).value;
+            products[idx].website = document.querySelector(`.edit-website[data-idx='${idx}']`).value;
+            products[idx].url = document.querySelector(`.edit-url[data-idx='${idx}']`).value;
+            products[idx].image = document.querySelector(`.edit-image[data-idx='${idx}']`).value;
+            renderProductList();
+            showNotification('Product updated!', 'success');
+        });
+    });
+    document.querySelectorAll('.product-action-btn.delete').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const idx = this.getAttribute('data-idx');
+            products.splice(idx, 1);
+            renderProductList();
+            showNotification('Product deleted!', 'success');
+        });
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Render product list after products are loaded
+    setTimeout(renderProductList, 500);
+    // Add product form handler
+    const addProductForm = document.getElementById('addProductForm');
+    if (addProductForm) {
+        addProductForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const newProduct = {
+                name: document.getElementById('productName').value,
+                price: document.getElementById('productPrice').value,
+                website: document.getElementById('productWebsite').value,
+                url: document.getElementById('productUrl').value,
+                image: document.getElementById('productImage').value
+            };
+            products.push(newProduct);
+            renderProductList();
+            showNotification('Product added!', 'success');
+            addProductForm.reset();
+        });
+    }
+}); 
