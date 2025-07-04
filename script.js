@@ -1,10 +1,7 @@
-// Menu Toggle Functionality
 function toggleMenu() {
     const menuContent = document.querySelector('.menu-content');
     menuContent.classList.toggle('show');
 }
-
-// Close menu when clicking outside
 document.addEventListener('click', (e) => {
     const menuContent = document.querySelector('.menu-content');
     const menuBtn = document.querySelector('.menu-btn');
@@ -12,8 +9,6 @@ document.addEventListener('click', (e) => {
         menuContent.classList.remove('show');
     }
 });
-
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -23,13 +18,10 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 behavior: 'smooth',
                 block: 'start'
             });
-            // Close menu after clicking a link
             document.querySelector('.menu-content').classList.remove('show');
         }
     });
 });
-
-// Animate numbers in stats
 function animateValue(element, start, end, duration) {
     let startTimestamp = null;
     const step = (timestamp) => {
@@ -43,13 +35,10 @@ function animateValue(element, start, end, duration) {
     };
     window.requestAnimationFrame(step);
 }
-
-// Intersection Observer for animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
-
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -62,13 +51,9 @@ const observer = new IntersectionObserver((entries) => {
         }
     });
 }, observerOptions);
-
-// Observe elements for animation
 document.querySelectorAll('.stat-card, .category-card, .product-card').forEach(el => {
     observer.observe(el);
 });
-
-// Fetch product data and enable search functionality
 let products = [];
 fetch('products.json')
     .then(response => response.json())
@@ -80,7 +65,6 @@ function displayProduct(product) {
         container.innerHTML = '<p>No product found.</p>';
         return;
     }
-    // Check if only image is present
     const hasDetails = product.name || product.price || product.website || product.url;
     if (!hasDetails && product.image) {
         container.innerHTML = `
@@ -93,9 +77,6 @@ function displayProduct(product) {
         `;
         return;
     }
-
-    // --- Price stats logic ---
-    // Sample price history data (should be replaced with real data if available)
     const priceHistoryMap = {
         'sony headphones': [350, 340, 330, 320, 310, 305, 299, 4350],
         'apple watch': [850, 860, 870, 880, 890, 895, 899, 49999],
@@ -103,12 +84,10 @@ function displayProduct(product) {
     };
     const key = (product.name || '').toLowerCase();
     let priceHistory = priceHistoryMap[key] || [];
-    // Always include the current price if not present
     const currentPrice = parseFloat(product.price);
     if (currentPrice && !priceHistory.includes(currentPrice)) {
         priceHistory = [...priceHistory, currentPrice];
     }
-    // If no price history, use current price for all stats
     if ((!priceHistory || priceHistory.length === 0 || isNaN(currentPrice)) && !isNaN(currentPrice)) {
         priceHistory = [currentPrice];
     }
@@ -118,7 +97,6 @@ function displayProduct(product) {
         avgPrice = Math.round(sum / priceHistory.length);
         maxPrice = Math.max(...priceHistory);
     }
-
     container.innerHTML = `
         <div class="product-search-card">
             <img src="${product.image || ''}" alt="${product.name || ''}" class="product-search-image">
@@ -133,8 +111,6 @@ function displayProduct(product) {
         </div>
     `;
 }
-
-// Listen for search button click
 const searchBtn = document.querySelector('.search-btn');
 const searchInput = document.querySelector('.search-input');
 if (searchBtn && searchInput) {
@@ -146,7 +122,6 @@ if (searchBtn && searchInput) {
         );
         displayProduct(product);
     });
-    // Optional: search on Enter key
     searchInput.addEventListener('keydown', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
@@ -154,8 +129,6 @@ if (searchBtn && searchInput) {
         }
     });
 }
-
-// Notification System
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -167,13 +140,9 @@ function showNotification(message, type = 'info') {
     `;
     
     document.body.appendChild(notification);
-    
-    // Trigger slide-in animation
     setTimeout(() => {
         notification.classList.add('show');
     }, 10);
-    
-    // Auto-dismiss after 3 seconds
     setTimeout(() => {
         notification.classList.remove('show');
         setTimeout(() => {
@@ -181,8 +150,6 @@ function showNotification(message, type = 'info') {
         }, 300);
     }, 3000);
 }
-
-// Add notification styles
 const notificationStyles = `
     .notification {
         position: fixed;
@@ -233,17 +200,9 @@ const notificationStyles = `
         line-height: 1.4;
     }
 `;
-
-// Add styles to document
 const styleSheet = document.createElement('style');
 styleSheet.textContent = notificationStyles;
 document.head.appendChild(styleSheet);
-
-// Example usage:
-// showNotification('Product price has been updated!', 'success');
-// showNotification('New deals available in your area', 'info');
-
-// Category card hover effects
 document.querySelectorAll('.category-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px)';
@@ -253,8 +212,6 @@ document.querySelectorAll('.category-card').forEach(card => {
         card.style.transform = 'translateY(0)';
     });
 });
-
-// Track button functionality
 document.querySelectorAll('.track-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
         e.preventDefault();
@@ -262,15 +219,12 @@ document.querySelectorAll('.track-btn').forEach(btn => {
         showNotification(`Now tracking price for ${productName}`, 'success');
     });
 });
-
-// Initialize animations when page loads
 document.addEventListener('DOMContentLoaded', () => {
-    // Add initial animation classes
+
     document.querySelectorAll('.animate-text').forEach((el, index) => {
         el.style.animationDelay = `${index * 0.2}s`;
     });
 
-    // Price chart data for each product (sample data)
     const priceData = [
         {
             labels: ['Day 1', 'Day 5', 'Day 10', 'Day 15', 'Day 20', 'Day 25', 'Day 30'],
@@ -285,8 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
             data: [102000, 95000, 90000, 88000, 85000, 83000, 81999]
         }
     ];
-
-    // Render a chart in each .price-chart canvas
     document.querySelectorAll('.price-chart canvas').forEach((canvas, idx) => {
         const ctx = canvas.getContext('2d');
         new Chart(ctx, {
@@ -314,12 +266,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 maintainAspectRatio: false
             }
         });
-        // Set canvas height for better appearance
         canvas.height = 60;
     });
 });
-
-// Contact Form Handling
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', async (e) => {
@@ -328,30 +277,26 @@ contactForm.addEventListener('submit', async (e) => {
     const submitBtn = contactForm.querySelector('.submit-btn');
     const originalBtnText = submitBtn.innerHTML;
     
-    // Disable button and show loading state
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     
     try {
-        // Simulate form submission
+
         await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Show success message
+
         showNotification('Your message has been sent successfully! We\'ll get back to you soon.', 'success');
-        
-        // Reset form
+
         contactForm.reset();
     } catch (error) {
-        // Show error message
+
         showNotification('Failed to send message. Please try again later.', 'error');
     } finally {
-        // Reset button state
+
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
     }
 });
 
-// Add error notification style
 const errorNotificationStyle = `
     .notification.error {
         border-left: 4px solid #f44336;
@@ -362,10 +307,8 @@ const errorNotificationStyle = `
     }
 `;
 
-// Add error notification style to existing styles
 styleSheet.textContent += errorNotificationStyle;
 
-// --- Product Management Section Logic ---
 function renderProductList() {
     const productList = document.getElementById('productList');
     if (!productList) return;
@@ -390,7 +333,6 @@ function renderProductList() {
     table += '</tbody></table>';
     productList.innerHTML = table;
 
-    // Add event listeners for edit and delete
     document.querySelectorAll('.product-action-btn.edit').forEach(btn => {
         btn.addEventListener('click', function() {
             const idx = this.getAttribute('data-idx');
@@ -414,9 +356,8 @@ function renderProductList() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Render product list after products are loaded
+
     setTimeout(renderProductList, 500);
-    // Add product form handler
     const addProductForm = document.getElementById('addProductForm');
     if (addProductForm) {
         addProductForm.addEventListener('submit', function(e) {
