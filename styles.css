@@ -1,4 +1,3 @@
-/* Modern CSS Reset */
 *, *::before, *::after {
     margin: 0;
     padding: 0;
@@ -22,7 +21,6 @@ body {
     background-color: var(--background-color);
 }
 
-/* Floating Menu */
 .floating-menu {
     position: fixed;
     top: 20px;
@@ -103,7 +101,6 @@ body {
     }
 }
 
-/* Responsive Menu */
 @media (max-width: 768px) {
     .floating-menu {
         top: 15px;
@@ -127,7 +124,6 @@ body {
     }
 }
 
-/* Logo Styles */
 .logo-container {
     position: fixed;
     top: 20px;
@@ -169,7 +165,6 @@ body {
     
 }
 
-/* Hero Section */
 .hero {
     background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     color: white;
@@ -368,7 +363,6 @@ body {
     color: var(--accent-color);
 }
 
-/* Hero Stats */
 .hero-stats {
     display: flex;
     justify-content: center;
@@ -419,7 +413,6 @@ body {
     margin: 0;
 }
 
-/* Animations */
 .animate-text {
     opacity: 1;
     transform: translateY(20px);
@@ -451,7 +444,6 @@ body {
     }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .hero {
         padding: 4rem 1rem;
@@ -516,7 +508,6 @@ body {
     }
 }
 
-/* Categories Section */
 .categories-section {
     padding: 4rem 2rem;
     background: var(--background-color);
@@ -646,7 +637,6 @@ body {
     color: white;
 }
 
-/* Responsive Design for Categories */
 @media (max-width: 768px) {
     .categories-section {
         padding: 3rem 1rem;
@@ -684,7 +674,6 @@ body {
     }
 }
 
-/* Trending Section */
 .trending-section {
     padding: 4rem 2rem;
 }
@@ -809,7 +798,6 @@ body {
     background: var(--secondary-color);
 }
 
-/* Features Section */
 .features-section {
     padding: 4rem 2rem;
     background: white;
@@ -854,7 +842,6 @@ body {
     color: var(--secondary-color);
 }
 
-/* Footer */
 footer {
     background: var(--secondary-color);
     color: white;
@@ -920,7 +907,6 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Interactive Elements */
 .track-btn:active {
     transform: scale(0.95);
 }
@@ -929,7 +915,6 @@ footer {
     transform: scale(0.98);
 }
 
-/* Custom Scrollbar */
 ::-webkit-scrollbar {
     width: 10px;
 }
@@ -947,7 +932,6 @@ footer {
     background: var(--secondary-color);
 }
 
-/* About Section Styles */
 .about-section {
     padding: 80px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -1042,8 +1026,6 @@ footer {
     color: #636e72;
     font-size: 1.1rem;
 }
-
-/* Responsive Styles for About Section */
 @media (max-width: 768px) {
     .about-section {
         padding: 60px 0;
@@ -1079,7 +1061,6 @@ footer {
     }
 }
 
-/* Contact Section Styles */
 .contact-section {
     padding: 80px 0;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -1238,7 +1219,6 @@ footer {
     font-size: 1.1rem;
 }
 
-/* Responsive Design for Contact Section */
 @media (max-width: 768px) {
     .contact-section {
         padding: 60px 0;
@@ -1265,7 +1245,6 @@ footer {
     }
 }
 
-/* Search Results Styles */
 #search-results {
     margin: 32px auto 0 auto;
     max-width: 500px;
