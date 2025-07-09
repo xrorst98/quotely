@@ -9,6 +9,7 @@ document.addEventListener('click', (e) => {
         menuContent.classList.remove('show');
     }
 });
+
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -39,6 +40,7 @@ const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
 };
+
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -97,6 +99,7 @@ function displayProduct(product) {
         avgPrice = Math.round(sum / priceHistory.length);
         maxPrice = Math.max(...priceHistory);
     }
+
     container.innerHTML = `
         <div class="product-search-card">
             <img src="${product.image || ''}" alt="${product.name || ''}" class="product-search-image">
@@ -111,6 +114,7 @@ function displayProduct(product) {
         </div>
     `;
 }
+
 const searchBtn = document.querySelector('.search-btn');
 const searchInput = document.querySelector('.search-input');
 if (searchBtn && searchInput) {
@@ -129,6 +133,7 @@ if (searchBtn && searchInput) {
         }
     });
 }
+
 function showNotification(message, type = 'info') {
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
@@ -203,6 +208,7 @@ const notificationStyles = `
 const styleSheet = document.createElement('style');
 styleSheet.textContent = notificationStyles;
 document.head.appendChild(styleSheet);
+
 document.querySelectorAll('.category-card').forEach(card => {
     card.addEventListener('mouseenter', () => {
         card.style.transform = 'translateY(-10px)';
@@ -219,6 +225,7 @@ document.querySelectorAll('.track-btn').forEach(btn => {
         showNotification(`Now tracking price for ${productName}`, 'success');
     });
 });
+
 document.addEventListener('DOMContentLoaded', () => {
 
     document.querySelectorAll('.animate-text').forEach((el, index) => {
@@ -239,6 +246,7 @@ document.addEventListener('DOMContentLoaded', () => {
             data: [102000, 95000, 90000, 88000, 85000, 83000, 81999]
         }
     ];
+
     document.querySelectorAll('.price-chart canvas').forEach((canvas, idx) => {
         const ctx = canvas.getContext('2d');
         new Chart(ctx, {
@@ -266,9 +274,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 maintainAspectRatio: false
             }
         });
+  
         canvas.height = 60;
     });
 });
+
+
 const contactForm = document.getElementById('contactForm');
 
 contactForm.addEventListener('submit', async (e) => {
@@ -276,22 +287,27 @@ contactForm.addEventListener('submit', async (e) => {
     
     const submitBtn = contactForm.querySelector('.submit-btn');
     const originalBtnText = submitBtn.innerHTML;
-    
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
     
     try {
-
-        await new Promise(resolve => setTimeout(resolve, 1500));
-
-        showNotification('Your message has been sent successfully! We\'ll get back to you soon.', 'success');
-
-        contactForm.reset();
+        const formData = new FormData(contactForm);
+        const response = await fetch(contactForm.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+        if (response.ok) {
+            showNotification('Your message has been sent successfully! We\'ll get back to you soon.', 'success');
+            contactForm.reset();
+        } else {
+            showNotification('Failed to send message. Please try again later.', 'error');
+        }
     } catch (error) {
-
         showNotification('Failed to send message. Please try again later.', 'error');
     } finally {
-
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
     }
@@ -356,8 +372,9 @@ function renderProductList() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-
+    
     setTimeout(renderProductList, 500);
+    
     const addProductForm = document.getElementById('addProductForm');
     if (addProductForm) {
         addProductForm.addEventListener('submit', function(e) {
